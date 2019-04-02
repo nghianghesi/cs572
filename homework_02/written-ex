@@ -1,0 +1,11 @@
+setTimeout place callback to next round of even loop
+while setImmediate set callback to end of current event loop round
+forex: when do you some thing immediately (same event loop round) after current timeout handler
+--> need to use setImmediate.
+
+process.nextTick to register callback at the start of the next event tick
+--> higher priority than all other waiting callback
+while setImmediate set callback to end of current event loop round
+
+
+10 core module of Node: http2, https, crypto, net, os, url, domain, escape, assert, fs, events, stream
