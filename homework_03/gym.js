@@ -7,9 +7,13 @@ class Gym extends EventEmitter{
             this.emit('boom');
         },1000);
     }
+
+    get name(){
+        return "abc";
+    }
 }
 
 const gym = new Gym();
 gym.on('boom', ()=>{
-    console.log('Athlete is working out');
+    console.log(`${gym.name} Athlete is working out`);
 });

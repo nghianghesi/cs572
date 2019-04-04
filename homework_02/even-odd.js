@@ -11,7 +11,7 @@ Array.prototype.asyncFilter = function(filterfunc){
                     result.push(self[idx]);
                 }
                 idx++;
-                setImmediate(dofilter);
+                setImmediate(dofilter,0);
             }else{
                 resolve(result);        
             }
@@ -34,7 +34,7 @@ Array.prototype.odd = function(){
 
 console.log('start');
 let A = [], B=[];
-for(let i=0;i<100000;i++){
+for(let i=0;i<100;i++){
     A.push(i);
     B.push(i);
     B.push(i*2);

@@ -60,3 +60,6 @@ typings/
 # next.js build output
 .next
 /.project
+homework_03/dummy.txt
+homework_04/dummy.txt
+/fork

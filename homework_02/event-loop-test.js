@@ -26,7 +26,7 @@ queueMicrotask(()=>{console.log('micro task');});
 process.nextTick(()=>{console.log('next tick')});*/
 
 
-new Promise(function(resolve, reject){
+/*new Promise(function(resolve, reject){
     console.log('promise body');
     resolve('promise');
 })
@@ -53,4 +53,28 @@ setTimeout(()=>{
     setImmediate(()=>{console.log('immediate-tm');});
     setTimeout(()=>{console.log('timeout-tm');},0);
 },0);
-console.log('done');
+console.log('done');*/
+
+var promise2 = new Promise(function(resolve2, reject2){
+    new Promise(function(resolve, reject){
+        setTimeout(() =>{
+            console.log('before then');
+            setTimeout(()=>{console.log('timeout before promise');},0);
+            setImmediate(()=>{console.log('immedidate before promise');});
+            resolve('promise');
+            console.log('after resolve');
+            process.nextTick(()=>{console.log('next tick 1')});
+        },0);
+    })
+    .then((res)=>{
+        console.log('promise-then');
+        console.log(res);
+        resolve2('promise2');        
+        console.log('after resolve 2');
+        process.nextTick(()=>{console.log('next tick 2')});
+    });
+
+}).then((res) => {    
+    console.log('promise2-then');
+    console.log(res);
+});
