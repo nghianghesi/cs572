@@ -8,15 +8,23 @@ const entities = [
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send(entities);
+    const paginationLimit=20;
+    res.set({
+        "Pagination-Count": (entities.length+paginationLimit-1)/paginationLimit,
+        "Pagination-Page": 1, 
+        "Pagination-Limit": paginationLimit
+    });
+    return req.method=='GET'?res.json(entities):res.end();
 });
 
 router.get('/:id', function(req, res, next) {
     const grades = entities.filter(x=>x.id == req.params.id);
     if(grades.length == 1){
-        res.status(200).json(grades[0]);
+        res.status(200);
+        return req.method=='GET'?res.json(grades[0]):res.end();
     }else{
-        res.status(404).json("grade not found");
+        res.status(404);
+        return req.method=='GET'?res.json("grade not found"):res.end();
     }
 });
 
@@ -58,9 +66,5 @@ router.delete('/:id', function(req, res, next) {
     }
 });
 
-router.head('/', function(req, res, next){
-    console.log('head grade');
-    res.status(200).send('greads api');
-});
   
 module.exports = router;

@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/grades', cors(), gradesRouter);
+app.use('/grades', cors({methods:'GET,HEAD,PUT,POST,DELETE'}), gradesRouter);
 //app.use('/grades', gradesRouter);
 
 // catch 404 and forward to error handler

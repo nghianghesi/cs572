@@ -13,11 +13,16 @@ module.exports = function(req, res, next){
         };
         getRawBody(req, options, function (err, text) {
             if (err) return next(err);
-            try {
-                req.body = JSON.parse(text);
-                return next();
-            } catch (error) {
-                return next({code:500, message:'invalid json format'});
+            if(text>''){
+                try {
+                    req.body = JSON.parse(text);
+                    return next();
+                } catch (error) {
+                    return next({code:500, message:'invalid json format'});
+                }
+            }else{
+                req.body=null;
+                next();
             }
         }); 
     }else{
