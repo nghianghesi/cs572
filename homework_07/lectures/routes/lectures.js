@@ -1,5 +1,4 @@
 var express = require('express');
-const extend = require('extend');
 var router = express.Router();
 const MongodbClient = require('mongodb');
 const client = new MongodbClient('mongodb://localhost:27017');
@@ -58,7 +57,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/search/:q', function(req, res, next) {    
-    const query ={
+    const query = {
         $or:[{'course':{$regex:`.*?${req.params.q}.*?`}},
                 {'lecture':{$regex:`.*?${req.params.q}.*?`}}]
     };
