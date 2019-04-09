@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/lectures/search', cors({methods:'GET,HEAD'}));
-app.use('/lectures', cors({methods:'GET,HEAD,PUT,POST,DELETE'}), usersRouter);
+app.use('/lectures', cors({methods:'GET,HEAD,PUT,POST,DELETE'}), lecturesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,4 +43,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.listen(9000);
 module.exports = app;

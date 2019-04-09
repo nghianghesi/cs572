@@ -1,21 +1,31 @@
-book{
+books{
 	ibsn: String,
 	tags: array of String,
 	authors:array of String,	
 	copies:array of {
-		code:String,
-		borrow:{
-			studentId:String,
-			studentName:String,
-			contact:String,
-			date:Date,
-			expiredDate:Date
-		},
-		previousBorrows:array of {
-			studentName:String,
-			date:Date,
-			expiredDate:Date,
-			returnedDate:Date		
-		}
+		code:String
+	},
+	borrows:{
+		copyCode:String,
+		studentId:String,
+		studentName:String,
+		contact:String,
+		date:Date,
+		expiredDate:Date
 	}
 }
+
+previousBorrows:array of {
+	isbn:String,
+	studentName:String,
+	date:Date,
+	expiredDate:Date,
+	returnedDate:Date		
+}
+
+
+to query current borrows, we will use books.find({borrows::$exists})
+so find expires borrows by books.find({borrows:{expiredDate:{$lt:today}}})
+when student borrow a book copy: insert correspondence books.borrows record
+when student return a book copy: remove correspondence books.borrows record and insert previousBorrows for history tracking. 
+We may use transaction here
