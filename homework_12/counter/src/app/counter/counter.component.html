@@ -1,5 +1,5 @@
 <p>
   <button (click)="decrease()">-</button>
-  <input [value]="value"/>
+  <input type="number" [(value)]="value" (blur)="value = $event.target.value"/>
   <button (click)="increase()">+</button>
 </p>
