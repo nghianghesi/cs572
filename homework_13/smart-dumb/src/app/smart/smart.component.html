@@ -1,0 +1,5 @@
+<ul>
+  <li [appIsvisible]="item.finished" *ngFor="let item of students">
+    <app-dumb [model]="item"></app-dumb>
+  </li>
+</ul>
