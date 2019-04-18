@@ -1,0 +1,80 @@
+db.getCollection('zipcodes').aggregate([{$match:{state:'WA'}}])
+db.getCollection('zipcodes').aggregate([{$match:{pop:{$lt:5000}}}])
+db.getCollection('zipcodes').aggregate([
+    {$group:{_id:{state:'$state',city:'$city'},count:{$sum:1}}},
+    {$match:{count:{$gt:1}}},
+    {$project:{state:'$_id.state', city:'$_id.city'}},
+    {$sort:{state:1,city:1}}
+])
+
+
+db.getCollection('zipcodes').aggregate([
+    {$group:{
+        _id:{state:'$state', city:'$city'},
+        population:{$sum:'$pop'}
+    }},   
+    {$sort:{population:-1}},
+    {$group:{_id:'$_id.state', city:{$first:'$_id.city'}, population:{$first:'$population'}} },
+    {$sort:{_id:1}}
+])
+
+db.getCollection('zipcodes').aggregate([
+    {$group:{
+        _id:{state:'$state', city:'$city'},
+        population:{$sum:'$pop'}
+    }},
+    {$group:{
+        _id:'$_id.state',
+        population:{$push:{city:'$_id.city', population:'$population'}}
+    }},     
+    {$project:{
+        _id:'$_id',
+        population:{$reduce:{
+                input:'$population',
+                initialValue:{city:'', population:0},
+                in:{ $cond:{if:{$gt:['$$value.population' , '$$this.population']}, then : '$$value', else:'$$this'}}
+            }}
+    }},
+    {$sort:{_id:1}}
+])
+
+
+
+db.getCollection('zipcodes').aggregate([
+    {$group:{
+        _id:{state:'$state', city:'$city'},
+        population:{$sum:'$pop'}
+    }},
+    {$group:{
+        _id:'$_id.state',
+		maxp:{$max:'$population'},
+        populations:{$push:{city:'$_id.city', population:'$population'}}
+    }},     
+    {$project:{
+        _id:'$_id',
+		maxp:'$maxp',
+        city:{
+            $filter: {
+               input: "$populations",
+               as: "item",
+               cond: { $eq: [ "$$item.population", '$maxp' ] }
+            }}
+    }},
+    {$sort:{_id:1}}
+])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

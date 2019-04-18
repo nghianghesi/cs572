@@ -7,7 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class AppComponent {
   title = 'counter';
-  @Input() countervalue = 10;
+  @Input() _countervalue = 10;
+  get countervalue(){
+    return this._countervalue;
+  }
+  set countervalue(value){
+    this._countervalue = value;
+  }
   updateCounterValue(value:number) : void{
     this.countervalue = value;
     //console.log(`couter updated ${value}`);

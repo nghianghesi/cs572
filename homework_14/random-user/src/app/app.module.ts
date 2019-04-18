@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { UsersModule } from './users/users.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OnlineDataService } from './services/online-data.service';
+import { LazyloadingUsersModule } from './users/lazyloading-users.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { OnlineDataService } from './services/online-data.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    UsersModule
+    LazyloadingUsersModule
   ],
   providers: [HttpClient, OnlineDataService],
   bootstrap: [AppComponent]

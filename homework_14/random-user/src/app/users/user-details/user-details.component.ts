@@ -21,12 +21,11 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   constructor(private userService : UserService, private router:ActivatedRoute) {
     this.routerSubcription = router.params.subscribe((param) =>{
-      console.log(param);
       this._userid = param['id'];
     });
   }
 
-  get user() : any{
+  get user() : any{    
     return this.userService.getUserByUUId(this._userid);
   }
 

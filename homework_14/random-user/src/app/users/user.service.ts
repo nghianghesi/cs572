@@ -8,7 +8,8 @@ export class UserService {
   private _users:any[] = [];
   constructor(private onlinedata: OnlineDataService) { 
     this.updateData();
-    onlinedata.on('datachanged',()=>{
+    onlinedata.subscribe(()=>{
+      console.log('data changed');
       this.updateData();
     });
   }  

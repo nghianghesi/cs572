@@ -5,16 +5,17 @@ import { UsersComponent } from './users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [
-  {path:'users', component:UsersComponent},  
-  {path:'users/:id', component:UserDetailsComponent},
+  {path:'', component:UsersComponent},  
+  {path:':id', component:UserDetailsComponent},
 ];
 
 @NgModule({
   declarations: [UsersComponent, UserDetailsComponent],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forChild(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule], 
+  bootstrap:[UsersComponent]
 })
 export class UsersModule { }

@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output,EventEmitter, ViewChild } from '@angul
 export class CounterComponent implements OnInit {
 
   private _value : number;
-  @Output() onValueChanged = new EventEmitter<number>();
+  @Output() valueChange = new EventEmitter<number>();
   @ViewChild('i')in;
   constructor() {
     this.value=0;
@@ -20,13 +20,13 @@ export class CounterComponent implements OnInit {
 
   increase(): boolean  {
     this.value += 1;
-    this.onValueChanged.emit(this.value);
+    this.valueChange.emit(this.value);
     return false;
   }  
   
   decrease(): boolean  {
     this.value -= 1;
-    this.onValueChanged.emit(this.value);
+    this.valueChange.emit(this.value);
     return false;
   }
 
@@ -36,6 +36,6 @@ export class CounterComponent implements OnInit {
 
   set value(val) {
     this._value = val;
-    this.onValueChanged.emit(this.value);
+    this.valueChange.emit(this.value);
   }
 }

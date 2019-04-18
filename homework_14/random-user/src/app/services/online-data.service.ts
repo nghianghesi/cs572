@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {EventEmitter} from 'events'
 
 @Injectable({
   providedIn: 'root'
 })
-export class OnlineDataService extends EventEmitter{
+export class OnlineDataService extends EventEmitter<string>{
 
   constructor(private http:HttpClient) {
     super();

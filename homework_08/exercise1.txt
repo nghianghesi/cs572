@@ -26,4 +26,7 @@
 22. db.getCollection('restaurants').find({'coord':{$elemMatch:{$type:'Double'}}})
 23. db.getCollection('restaurants').find({name:/^Mad/},{_id:0, name:1, district:1, cuisine:1, 'address.coord':1})
 
+{location:{'$near':{'$geometry':{type:'Point',coordinates:[-91.9665342,41.017654]},$maxDistance:2000}}}
+createIndex({location:'2d|2dsphere'})
+{location:{'$near':{coordinates:[-91.9665342,41.017654]},$maxDistance:2000}}
 
