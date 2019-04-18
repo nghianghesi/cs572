@@ -1,0 +1,11 @@
+  <table>
+    <tbody>
+      <tr *ngFor="let u of users">
+          <td>{{u.name.title}}</td>
+          <td>{{u.name.first}}</td>
+          <td>{{u.name.last}}</td>
+          <td><img [src]="u.picture.thumbnail"/></td>
+          <td><a [routerLink]="['/users',u.login.uuid]">Details</a></td>
+      </tr>
+    </tbody>
+</table>
